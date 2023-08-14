@@ -1,20 +1,24 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useDispatch, useSelector } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
-import { Container, Table, Typography } from '@mui/material';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { darkTheme } from '../../components/Header';
+import {
+  Container,
+  Table,
+  Typography,
+  TableBody,
+  TableCell,
+  ThemeProvider,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
+import { darkTheme } from '../Header';
 import { getFormatDate } from '../UsersTable';
 
-import { addAction } from '../../store/slices/actionSlice';
+import { addAction, refreshActions } from '../../store/slices/actionSlice';
 
-function IventsTable() {
+function EventsTable() {
   const dispatch = useDispatch();
   const actions = useSelector((state) => state.actions.value);
   const scrollRef = useRef();
@@ -30,9 +34,14 @@ function IventsTable() {
 
   const websocket = useWebSocket('wss://test.relabs.ru/event', {
     shouldReconnect: (closeEvent) => true,
+    retryOnError: true,
+    reconnectAttempts: 10,
+    reconnectInterval: 3000,
   });
   const { lastJsonMessage } = websocket;
-
+  useEffect(() => {
+    dispatch(refreshActions());
+  }, [dispatch]);
   useEffect(() => {
     if (lastJsonMessage) dispatch(addAction(lastJsonMessage));
   }, [lastJsonMessage, dispatch]);
@@ -78,4 +87,4 @@ function IventsTable() {
   );
 }
 
-export default IventsTable;
+export default EventsTable;

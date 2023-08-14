@@ -1,13 +1,13 @@
 import React from 'react';
 
 import UsersTable from '../../components/UsersTable';
-import IventsTable from '../../components/IventsTable';
+import EventsTable from '../../components/EventsTable';
 
 function Main() {
   return (
     <div style={{ display: 'flex' }}>
       <UsersTable />
-      <IventsTable />
+      <EventsTable />
     </div>
   );
 }

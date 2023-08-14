@@ -3,17 +3,25 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers } from '../../store/slices/usersSlice';
 import { ThemeProvider } from '@mui/material/styles';
-import { Button, Container, LinearProgress, Pagination, Table, Typography } from '@mui/material';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { darkTheme } from '../../components/Header';
+import {
+  Button,
+  Container,
+  LinearProgress,
+  Pagination,
+  Table,
+  Typography,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 import { format } from 'date-fns';
 
-import { deliteItem } from '../../store/slices/usersSlice';
+import { darkTheme } from '../../components/Header';
+
+import { deleteItem } from '../../store/slices/usersSlice';
 
 export const getFormatDate = (time) => {
   const date = new Date(time);
@@ -32,7 +40,7 @@ function UsersTable() {
   const count = total / per_page;
 
   const removeItem = (id) => {
-    dispatch(deliteItem(id));
+    dispatch(deleteItem(id));
   };
 
   useEffect(() => {
@@ -54,7 +62,7 @@ function UsersTable() {
                 <TableCell>ID</TableCell>
                 <TableCell>Имя</TableCell>
                 <TableCell align="right">Роль</TableCell>
-                <TableCell align="right">Время создания(g)</TableCell>
+                <TableCell align="right">Время создания</TableCell>
                 <TableCell align="right">Действия</TableCell>
               </TableRow>
             </TableHead>

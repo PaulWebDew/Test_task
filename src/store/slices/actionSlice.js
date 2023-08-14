@@ -11,8 +11,11 @@ const actionsSlice = createSlice({
     addAction(state, { payload }) {
       state.value.push(payload);
     },
+    refreshActions(state, { payload }) {
+      state.value = [];
+    },
   },
 });
 
-export const { addAction } = actionsSlice.actions;
+export const { addAction, refreshActions } = actionsSlice.actions;
 export default actionsSlice.reducer;

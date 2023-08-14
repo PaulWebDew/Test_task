@@ -21,7 +21,7 @@ export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    deliteItem(state, action) {
+    deleteItem(state, action) {
       state.items = state.items.filter((item) => item.id.toString() !== action.payload.toString());
     },
   },
@@ -40,5 +40,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { deliteItem } = userSlice.actions;
+export const { deleteItem } = userSlice.actions;
 export default userSlice.reducer;

@@ -61,16 +61,16 @@ function Login() {
             <TextField
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              label="Email"
+              label="Почта"
               required
               fullWidth
               margin="normal"
               {...register('email', {
-                required: 'Заполните поле',
+                required: 'Заполните поле!',
                 validate: {
                   matchPattern: (v) =>
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-                    'Введите валидный Email (*** @**.**)',
+                    'Введите адрес эл.почты (*** @**.**)',
                 },
               })}
               error={errors.email ? true : false}
@@ -99,11 +99,11 @@ function Login() {
               fullWidth
               margin="normal"
               {...register('password', {
-                required: 'Заполните поле',
+                required: 'Заполните поле!',
                 validate: {
                   matchPattern: (v) =>
                     /^(?=.*\S)(?=.*[A-ZА-Я])\S{8,}$/.test(v) ||
-                    'Минимум 8 символов + одна заглавная буква(без пробел)',
+                    'Минимум 8 символов + одна заглавная буква(без пробелов)',
                 },
               })}
               error={errors.password ? true : false}
